@@ -8,19 +8,22 @@ class linked_list{
     struct node{
         T dato;
         node* p_next;
+        node* p_prev;
         node(const T & d, node*p_next_=nullptr){
             dato=d;
             p_next=p_next_;
         }
         void setNext(node *nd) {
             this->p_next = nd;
+            nd->p_prev = this;
         }
 
     };
 private:
     node*p_head;
+    node*p_last;
 public:
-    linked_list():p_head(nullptr){}
+    linked_list():p_head(nullptr),p_last(nullptr){}
 
     class iterator{
     private:
@@ -42,10 +45,11 @@ public:
             n=n->p_next;
             return *this;
         }
-        /*iterator & operator --()
+        iterator & operator --()
         {
+            n=n->p_prev;
             return *this;
-        }*/
+        }
         ~iterator () = default;
     };
 
@@ -57,6 +61,11 @@ public:
     iterator end()
     {
         return iterator(nullptr);
+    }
+
+    iterator last()
+    {
+        return iterator(p_last);
     }
 
     void push_front(const T & d){
@@ -77,6 +86,7 @@ public:
             curr = curr->p_next;
         }
         curr->setNext(nd);
+        p_last=nd;
     }
 
 
@@ -89,6 +99,7 @@ public:
     ~linked_list()
     {
         while(p_head) remove_front();
+        delete p_last;
     }
 
 };

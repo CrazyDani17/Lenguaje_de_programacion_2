@@ -72,13 +72,11 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    /*--it;
     if(it!=pictures.begin()){
-
+        --it;
     }
     else{
-        it=pictures.end();
-        --it;
+        it=pictures.last();
     }
     string txt=*it;
     a=new char[txt.size()];
@@ -88,5 +86,4 @@ void MainWindow::on_pushButton_clicked()
     }
     pix={a};
     ui->label_picture->setPixmap(pix);
-    */
 }
