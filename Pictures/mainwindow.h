@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPixmap>
 #include "linked_list.h"
+#include "pict.h"
 namespace Ui {
 class MainWindow;
 }
@@ -14,8 +15,8 @@ class MainWindow : public QMainWindow
 
 public:
     QPixmap pix;
-    linked_list<string>pictures;
-    linked_list<string>::iterator it;
+    linked_list<pict>pictures;
+    linked_list<pict>::iterator it;
     char*a;
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -27,9 +28,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    string file;
-    string name;
-    string tags;
     string text;
 };
 

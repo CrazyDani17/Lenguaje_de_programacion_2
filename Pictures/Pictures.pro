@@ -30,7 +30,8 @@ SOURCES += \
 
 HEADERS += \
         linked_list.h \
-        mainwindow.h
+        mainwindow.h \
+        pict.h
 
 FORMS += \
         mainwindow.ui

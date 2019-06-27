@@ -6,22 +6,32 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    file="hola";
-    name="mundo";
-    tags="<p>hola</p><p>mundo</p>";
-    text= "File: " + file + "<p>Name:" + name + "</p>" + "Tags: " + tags;
+    pict img1("Verde","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga.jpg");
+    //img1.add_tag("Paisaje");
+    //img1.add_tag("Verde");
+    pict img2("Ciudad","/media/crazydani17/3CC4EEECC4EEA6FC//Users/danie/OneDrive/Documentos/Pictures/pictures/descarga2.jpg");
+    //img2.add_tag("Ciudad");
+    //img2.add_tag("Paisaje");
+    pict img3("Arte","/media/crazydani17/3CC4EEECC4EEA6FC//Users/danie/OneDrive/Documentos/Pictures/pictures/descarga3.jpg");
+    //img3.add_tag("Arte");
+    pict img4("Arcoiris","/media/crazydani17/3CC4EEECC4EEA6FC//Users/danie/OneDrive/Documentos/Pictures/pictures/descarga4.jpg");
+    //img4.add_tag("Arcoiris");
+    pictures.push_back(img1);
+    pictures.push_back(img2);
+    pictures.push_back(img3);
+    pictures.push_back(img4);
+    it=pictures.begin();
+    text=(*it).show_all();
+
     a=new char[text.size()];
     a[text.size()]=0;
     for(size_t i=0;i<text.size();i++){
         a[i]=text[i];
     }
     ui->label_txt->setText(a);
-    pictures.push_back("C:/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga.jpg");
-    pictures.push_back("C:/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga2.jpg");
-    pictures.push_back("C:/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga3.jpg");
-    pictures.push_back("C:/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga4.jpg");
+
     it=pictures.begin();
-    string txt=*it;
+    string txt=(*it).show_file();
     a=new char[txt.size()];
     a[txt.size()]=0;
     for(size_t i=0;i<txt.size();i++){
@@ -40,18 +50,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    /*file="hola";
-    name="mundo";
-    tags="<p>hola</p><p>mundo</p>";
-    text= "File: " + file + "<p>Name:" + name + "</p>" + "Tags: " + tags;
 
-    a=new char[text.size()];
-    a[text.size()]=0;
-    for(size_t i=0;i<text.size();i++){
-        a[i]=text[i];
-    }
-    ui->label_txt->setText(a);
-    */
     ++it;
     if(it!=pictures.end()){
 
@@ -59,7 +58,14 @@ void MainWindow::on_pushButton_2_clicked()
     else{
         it=pictures.begin();
     }
-    string txt=*it;
+    text=(*it).show_all();
+    a=new char[text.size()];
+    a[text.size()]=0;
+    for(size_t i=0;i<text.size();i++){
+        a[i]=text[i];
+    }
+    ui->label_txt->setText(a);
+    string txt=(*it).show_file();
     a=new char[txt.size()];
     a[txt.size()]=0;
     for(size_t i=0;i<txt.size();i++){
@@ -78,7 +84,14 @@ void MainWindow::on_pushButton_clicked()
     else{
         it=pictures.last();
     }
-    string txt=*it;
+    text=(*it).show_all();
+    a=new char[text.size()];
+    a[text.size()]=0;
+    for(size_t i=0;i<text.size();i++){
+        a[i]=text[i];
+    }
+    ui->label_txt->setText(a);
+    string txt=(*it).show_file();
     a=new char[txt.size()];
     a[txt.size()]=0;
     for(size_t i=0;i<txt.size();i++){

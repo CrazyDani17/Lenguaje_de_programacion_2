@@ -8,8 +8,8 @@ class linked_list{
     struct node{
         T dato;
         node* p_next;
-        node* p_prev;
-        node(const T & d, node*p_next_=nullptr){
+        node* p_prev=nullptr;
+        node(const T & d, node* p_next_=nullptr){
             dato=d;
             p_next=p_next_;
         }
