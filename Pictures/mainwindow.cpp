@@ -67,7 +67,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //pict img4("Arcoiris","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga4.jpg");
     //img4.add_tag("Arcoiris");
     load_list(pictures,"/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/file.txt");
-    /*pictures.push_back(img1);
+    /*
+    pictures.push_back(img1);
     pictures.push_back(img2);
     pictures.push_back(img3);
     pictures.push_back(img4);
@@ -208,4 +209,16 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
 
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QString new_name=ui->textEdit_name->toPlainText();
+    string  nn = new_name.toStdString();
+    a=new char[nn.size()];
+    a[nn.size()]=0;
+    for(size_t i=0;i<nn.size();i++){
+        a[i]=nn[i];
+    }
+    (*it).add_name(a);
 }
