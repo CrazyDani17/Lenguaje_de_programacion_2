@@ -8,7 +8,7 @@ class bst{
         K key;
         D dato;
         node * p_child[2];
-        node(K &k, D &d):key(k),dato(d){
+        node(const K &k, const D &d=NULL):key(k),dato(d){
             p_child[0]=p_child[1]=nullptr;
         }
         ~node()=default;
