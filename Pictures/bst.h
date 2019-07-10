@@ -40,45 +40,97 @@ class bst{
             *n=new node(k,d);
             return true;
         }
+        bool rename(const K&k,const K &ky){
+            node **n;
+            if(!find(n,k)) return false;
+            (*n)->key=ky;
+            return true;
+        }
         void swap(node ** &n,int x){
              K aux=(*n)->key;
-             (*n)->key=((*(*n))->p_child[x])->key;
-             ((*(*n))->p_child[x])->key=aux;
+             (*n)->key=((*n)->p_child[x])->key;
+             ((*n)->p_child[x])->key=aux;
              D aux1=(*n)->dato;
-             (*n)->dato=((*(*n))->p_child[x])->dato;
-             ((*(*n))->p_child[x])->dato=aux1;
+             (*n)->dato=((*n)->p_child[x])->dato;
+             ((*n)->p_child[x])->dato=aux1;
              n=&(*n)->p_child[x];
         }
-        /*bool remove_(node **&n){
-
-        }*/
         bool remove(const K &k){
             node **n;
+            node *nd;
             if(!find(n,k))
                 return false;
             /*int size=0;
-            if((*(*n))->p_child[0]!=nullptr){
+            if((*n)->p_child[0]!=nullptr){
                 size++;
             }
-            if((*(*n))->p_child[1]!=nullptr){
+            if((*n)->p_child[1]!=nullptr){
                 size++;
             }
             if(size==0){
-               delete *n;
-               delete n;
+               nd=*n;
+               delete nd;
             }
             else if(size==1){
                 int x;
-                if((*(*n))->p_child[0]!=nullptr){
+                if((*n)->p_child[0]!=nullptr){
                     x=0;
                 }
                 else{
                     x=1;
                 }
                 swap(n,x);
-                while((*(*n))->p_child[0]!=nullptr || (*(*n))->p_child[1]!=nullptr){
-                    remove((*n)->key);
+                while((*n)->p_child[0]!=nullptr || (*n)->p_child[1]!=nullptr){
+                    size=0;
+                    if((*n)->p_child[0]!=nullptr){
+                        size++;
+                    }
+                    if((*n)->p_child[1]!=nullptr){
+                        size++;
+                    }
+                    if(size==1){
+                        if((*n)->p_child[0]!=nullptr){
+                            x=0;
+                        }
+                        else{
+                            x=1;
+                        }
+                        swap(n,x);
+                    }
+                    else{
+                        swap(n,1);
+                    }
                 }
+                nd=*n;
+                delete nd;
+            }
+            else{
+                swap(n,1);
+                int x;
+                while((*n)->p_child[0]!=nullptr || (*n)->p_child[1]!=nullptr){
+                    size=0;
+                    if((*n)->p_child[0]!=nullptr){
+                        size++;
+                    }
+                    if((*n)->p_child[1]!=nullptr){
+                        size++;
+                    }
+                    if(size==1){
+                        if((*n)->p_child[0]!=nullptr){
+                            x=0;
+                        }
+                        else{
+                            x=1;
+                        }
+                        swap(n,x);
+                    }
+                    else{
+                        swap(n,1);
+                    }
+                }
+                nd=*n;
+                delete nd;
+
             }*/
             return true;
         }
@@ -90,7 +142,9 @@ class bst{
             return(*n)->dato;
         }
         ~bst(){
-            //free all nodes
+            /*while(p_root){
+                remove(p_root->key);
+            }*/
         }
 };
 

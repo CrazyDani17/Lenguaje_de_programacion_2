@@ -56,28 +56,30 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    pict img1("Verde","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga.jpg");
+    //pict img1("Verde","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga.jpg");
     //img1.add_tag("Paisaje");
     //img1.add_tag("Verde");
-    pict img2("Ciudad","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga2.jpg");
+    //pict img2("Ciudad","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga2.jpg");
     //img2.add_tag("Ciudad");
     //img2.add_tag("Paisaje");
-    pict img3("Arte","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga3.jpg");
+    //pict img3("Arte","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga3.jpg");
     //img3.add_tag("Arte");
-    pict img4("Arcoiris","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga4.jpg");
+    //pict img4("Arcoiris","/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/descarga4.jpg");
     //img4.add_tag("Arcoiris");
-    //load_list(pictures,"/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/file.txt");
-
+    load_list(pictures,"/media/crazydani17/3CC4EEECC4EEA6FC/Users/danie/OneDrive/Documentos/Pictures/pictures/file.txt");
+    /*
     pictures.push_back(img1);
     pictures.push_back(img2);
     pictures.push_back(img3);
     pictures.push_back(img4);
+    */
     it=pictures.begin();
+    bst_pictures.insert((*it).show_name(),it);++it;
+    bst_pictures.insert((*it).show_name(),it);++it;
+    bst_pictures.insert((*it).show_name(),it);++it;
+    bst_pictures.insert((*it).show_name(),it);
 
-    bst_pictures.insert(img1.show_name(),it);
-    bst_pictures.insert(img2.show_name(),++it);
-    bst_pictures.insert(img3.show_name(),++it);
-    bst_pictures.insert(img4.show_name(),++it);
+    it=pictures.begin();
 
     text=(*it).show_all();
     a=new char[text.size()];
@@ -173,8 +175,8 @@ void MainWindow::on_pushButton_3_clicked()
         b[i]=nf[i];
     }
     pict new_img(a,b);
-
     pictures.push_back(new_img);
+    bst_pictures.insert(new_img.show_name(),pictures.last());
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -206,31 +208,37 @@ void MainWindow::on_pushButton_4_clicked()
     else{
         it=pictures.last();
     }
+    //bst_pictures.remove((*it).show_name());
     pictures.remove(it);
+
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
-     QString searcherd_name=ui->textEdit_search->toPlainText();
-     string  sn = searcherd_name.toStdString();
-
-     text=(*bst_pictures[sn]).show_all();
-     a=new char[text.size()];
-     a[text.size()]=0;
-     for(size_t i=0;i<text.size();i++){
+    QString searcherd_name=ui->textEdit_search->toPlainText();
+    string  sn = searcherd_name.toStdString();
+    if(bst_pictures.find(sn)){
+        it=bst_pictures[sn];
+        text=(*it).show_all();
+        a=new char[text.size()];
+        a[text.size()]=0;
+        for(size_t i=0;i<text.size();i++){
          a[i]=text[i];
-     }
-     ui->label_txt->setText(a);
-
-     it=pictures.begin();
-     string txt=(*bst_pictures[sn]).show_file();
-     a=new char[txt.size()];
-     a[txt.size()]=0;
-     for(size_t i=0;i<txt.size();i++){
+        }
+        ui->label_txt->setText(a);
+        string txt=(*it).show_file();
+        a=new char[txt.size()];
+        a[txt.size()]=0;
+        for(size_t i=0;i<txt.size();i++){
          a[i]=txt[i];
-     }
-     pix={a};
-     ui->label_picture->setPixmap(pix);
+        }
+        pix={a};
+        ui->label_picture->setPixmap(pix);
+    }
+    else{
+        ui->label_picture->setText("no find");
+        ui->label_txt->setText("");
+    }
 }
 
 void MainWindow::on_pushButton_6_clicked()
@@ -242,6 +250,7 @@ void MainWindow::on_pushButton_6_clicked()
     for(size_t i=0;i<nn.size();i++){
         a[i]=nn[i];
     }
+    bst_pictures.rename((*it).show_name(),nn);
     (*it).add_name(a);
 }
 
